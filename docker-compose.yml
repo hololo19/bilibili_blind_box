@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  blind-box-web:
+    build: .
+    container_name: blind-box-stats
+    ports:
+      - "5000:5000"
+    volumes:
+      # 挂载整个项目目录（开发模式，修改代码无需重新构建）
+      - .:/app
+      # 或者只挂载必要的目录
+      # - ./templates:/app/templates
+      # - ./static:/app/static
+      # - ./data:/app/data
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    networks:
+      - blind-box-net
+
+networks:
+  blind-box-net:
+    driver: bridge
